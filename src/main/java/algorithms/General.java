@@ -125,4 +125,20 @@ public class General {
 		
 		return smallestIndex;
 	}
+	
+	/**
+	 * Reverses an array
+	 * @param lst
+	 * @return
+	 * @runningTime Theta (n)
+	 */
+	public static <T extends Comparable<T>> ArrayList<T> reverse(ArrayList<T> lst) {
+		ArrayList<T> clone = new ArrayList<T>();
+		
+		for (int i = lst.size(); i > -1; i--) {
+			clone.add(lst.get(i));
+		}
+		
+		return clone;
+	}
 }
