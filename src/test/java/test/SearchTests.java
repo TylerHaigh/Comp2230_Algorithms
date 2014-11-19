@@ -44,24 +44,32 @@ public class SearchTests {
 		Vertex two = new Vertex();
 		Vertex three = new Vertex();
 		Vertex four = new Vertex();
+		Vertex five = new Vertex();
+		
+		Vertex nonExist = new Vertex();
 		
 		/*
 		 * one -----> two
-		 *  |
-		 *  |
-		 *  |
-		 *  v
-		 *  three --> four
+		 *  |          |
+		 *  |          |
+		 *  |          |
+		 *  v          v
+		 *  three --> four ---> five
 		 */
 		
 		g.add(one, 0);
-		g.add(two, 0);
-		g.add(three, 0);
 		g.add(two, 1);
 		g.add(three, 2);
-		g.add(four, 2);
 		g.add(four, 3);
+		g.add(five, 4);
 		
-		assertEquals(true, Search.depthFirstSearch(g, 0, four));
+		g.add(two, 0);
+		g.add(four, 1);
+		g.add(five, 3);
+		
+		g.add(three, 0);
+		g.add(four, 2);
+	
+		assertEquals(false, Search.depthFirstSearch(g, 0, nonExist));
 	}
 }

@@ -64,6 +64,7 @@ public class Search {
 	
 	private static <T extends Comparable<T>> boolean depthFirstSearchRec(Graph g, int start, Vertex key) {
 		Vertex v = g.getVertex(start);
+		System.out.print(v + "-->");
 		if (key.equals(v)) return true;
 		
 		boolean found = false;
@@ -75,6 +76,8 @@ public class Search {
 				if (found) break;
 			}
 		}
+		
+		System.out.print("\n  ");
 		
 		return found;
 	}
