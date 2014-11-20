@@ -70,6 +70,9 @@ public class SearchTests {
 		g.add(three, 0);
 		g.add(four, 2);
 	
-		assertEquals(false, Search.depthFirstSearch(g, 0, nonExist));
+		String actual = Search.depthFirstSearch(g, 0, nonExist);
+		String expected = "(1)(2)(4)(5)(3)";
+		
+		assertEquals(expected, actual);
 	}
 }

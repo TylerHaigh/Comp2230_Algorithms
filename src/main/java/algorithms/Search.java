@@ -52,7 +52,7 @@ public class Search {
 		return -1;
 	}
 	
-	public static <T extends Comparable<T>> boolean depthFirstSearch(Graph g, int start, Vertex key) {
+	public static String depthFirstSearch(Graph g, int start, Vertex key) {
 		int n = g.size();
 		for (int i = 0; i < n; i++) {
 			Vertex v = g.getVertex(i);
@@ -62,23 +62,19 @@ public class Search {
 		return depthFirstSearchRec(g, start, key);
 	}
 	
-	private static <T extends Comparable<T>> boolean depthFirstSearchRec(Graph g, int start, Vertex key) {
+	private static String depthFirstSearchRec(Graph g, int start, Vertex key) {
 		Vertex v = g.getVertex(start);
-		System.out.print(v + "-->");
-		if (key.equals(v)) return true;
+		String result = v.toString();
 		
-		boolean found = false;
 		v.setMarked(true);
 		
 		for (Vertex w : v.getAdjacentVertices()) {
 			if (!w.isMarked()) {
-				found = depthFirstSearchRec(g, g.getList().indexOf(w), key);
-				if (found) break;
+				result += depthFirstSearchRec(g, g.getList().indexOf(w), key);
 			}
 		}
 		
-		System.out.print("\n  ");
-		
-		return found;
+		return result;
 	}
+	
 }
