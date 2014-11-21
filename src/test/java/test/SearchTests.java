@@ -45,8 +45,12 @@ public class SearchTests {
 		Vertex three = new Vertex();
 		Vertex four = new Vertex();
 		Vertex five = new Vertex();
-		
-		Vertex nonExist = new Vertex();
+
+		one.setIndex(1);
+		two.setIndex(2);
+		three.setIndex(3);
+		four.setIndex(4);
+		five.setIndex(5);
 		
 		/*
 		 * one -----> two
@@ -70,8 +74,52 @@ public class SearchTests {
 		g.add(three, 0);
 		g.add(four, 2);
 	
-		String actual = Search.depthFirstSearch(g, 0, nonExist);
+		String actual = Search.depthFirstSearch(g, 0);
 		String expected = "(1)(2)(4)(5)(3)";
+		
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void bredthFirstSearchTest() {
+Graph g = new Graph();
+		
+		Vertex one = new Vertex();
+		Vertex two = new Vertex();
+		Vertex three = new Vertex();
+		Vertex four = new Vertex();
+		Vertex five = new Vertex();
+		
+		one.setIndex(1);
+		two.setIndex(2);
+		three.setIndex(3);
+		four.setIndex(4);
+		five.setIndex(5);
+		
+		/*
+		 * one -----> two
+		 *  |          |
+		 *  |          |
+		 *  |          |
+		 *  v          v
+		 *  three --> four ---> five
+		 */
+		
+		g.add(one, 0);
+		g.add(two, 1);
+		g.add(three, 2);
+		g.add(four, 3);
+		g.add(five, 4);
+		
+		g.add(two, 0);
+		g.add(four, 1);
+		g.add(five, 3);
+		
+		g.add(three, 0);
+		g.add(four, 2);
+	
+		String actual = Search.bredthFirstSearch(g, 0);
+		String expected = "(1)(2)(3)(4)(5)";
 		
 		assertEquals(expected, actual);
 	}
