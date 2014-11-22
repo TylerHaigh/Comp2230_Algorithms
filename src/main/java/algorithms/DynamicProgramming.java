@@ -118,4 +118,34 @@ public class DynamicProgramming {
 		
 		return multiplied;
 	}
+	
+	public static <T> int[][] longestCommonSequence(T[] sequenceA, T[] sequenceB) {
+		int aLength = sequenceA.length;
+		int bLength = sequenceB.length;
+		
+		int[][] matrix = new int[aLength+1][bLength+1];
+		
+		//Setup. Fill in first column and top row with zeros
+		for (int i = 0; i < aLength; i++) {
+			matrix[i][0] = 0;
+		}
+		
+		for (int i = 1; i < bLength; i++) {
+			matrix[0][i] = 0;
+		}
+		
+		//Fill in table
+		for (int i = 1; i <= aLength; i++) {
+			for (int j = 1; j <= bLength; j++) {
+				if (sequenceA[i-1] != sequenceB[j-1] && !sequenceA[i-1].equals(sequenceB[j-1]))
+					//Sequence element does not match. Look up and left for value
+					matrix[i][j] = Math.max(matrix[i-1][j], matrix[i][j-1]);
+				else
+					//Sequence element matches
+					matrix[i][j] = 1 + matrix[i-1][j-1];
+			}
+		}
+		
+		return matrix;
+	}
 }
