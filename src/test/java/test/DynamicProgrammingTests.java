@@ -44,4 +44,36 @@ public class DynamicProgrammingTests {
 		
 		Assert.assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void testDynamicCoinChange() {
+		int[] denom = {10, 6, 1};
+		int sum = 10;
+		
+		int[][] expecteds =	{
+			  {0, 1, 2, 3, 4, 5, 1, 2, 3, 4, 1},
+			  {0, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5},
+			  {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10} };
+		int [][] actuals = DynamicProgramming.dynamicCoinChange(denom, sum);
+		
+		//Print the partial sums
+		System.out.print("\t");
+		for (int k = 0; k < actuals[1].length; k++) {
+			System.out.print("S=" + k + ",\t");
+		}
+		System.out.println();
+		
+		//Print the martix rows
+		for (int i = 0; i < actuals.length; i++) {
+			
+			System.out.print(denom[i] + ":\t");
+			for (int j = 0; j < actuals[i].length; j++) {
+				System.out.print(actuals[i][j] + ",\t");
+			}
+			System.out.println();
+			
+			Assert.assertArrayEquals(expecteds[i], actuals[i]);
+		}
+		
+	}
 }

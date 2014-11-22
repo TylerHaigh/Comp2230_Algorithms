@@ -64,4 +64,30 @@ public class DynamicProgramming {
 		results[n] = val;
 		return val;
 	}
+	
+	public static int[][] dynamicCoinChange(int[] denom, int sum) {
+		int n = denom.length;
+		int[][] change = new int[n][sum + 1];
+		
+		//Fill in bottom row with smallest denomination
+		for (int i = 0; i <= sum; i++) {
+			change[n-1][i] = i;
+		}
+		
+		//Loop back through denominations
+		for (int i = n - 2; i >= 0; i--) {
+			
+			//Loop through 0 to sum
+			for (int j = 0; j <= sum; j++) {
+				//If denomination is less than partial sum
+				//or can accommodate lower denomination and less change from this denomination 
+				if (denom[i] > j || change[i+1][j] < 1 + change[i][j - denom[i]])
+					change[i][j] = change[i+1][j];
+				else
+					change[i][j] = 1 + change[i][j - denom[i]];
+			}
+		}
+		
+		return change;
+	}
 }
