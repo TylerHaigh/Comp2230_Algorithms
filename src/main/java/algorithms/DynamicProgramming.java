@@ -34,4 +34,12 @@ public class DynamicProgramming {
 		
 		return last;
 	}
+	
+	public static int exponential(int val, int exponent) {
+		int result = 0;
+		for (int i = 0; i < exponent; i++) {
+			result += val * exponent;
+		}
+		return result;
+	}
 }

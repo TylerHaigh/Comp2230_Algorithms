@@ -25,4 +25,14 @@ public class DynamicProgrammingTests {
 		
 		Assert.assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void testExponential() {
+		int val = 3;
+		int exponent = 3;
+		int expected = 27;
+		int actual = DynamicProgramming.exponential(val, exponent);
+		
+		Assert.assertEquals(expected, actual);
+	}
 }
