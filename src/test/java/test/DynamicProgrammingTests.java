@@ -11,8 +11,8 @@ public class DynamicProgrammingTests {
 	@Test
 	public void testFibonacci_array() {
 		int n = 23;
-		int expected = 28657;
-		int actual = DynamicProgramming.fibonacci_array(n);
+		long expected = 28657;
+		long actual = DynamicProgramming.fibonacci_array(n);
 		
 		Assert.assertEquals(expected, actual);
 	}
@@ -20,8 +20,8 @@ public class DynamicProgrammingTests {
 	@Test
 	public void testFibonacci_simple() {
 		int n = 17;
-		int expected = 1597;
-		int actual = DynamicProgramming.fibonacci_simple(n);
+		long expected = 1597;
+		long actual = DynamicProgramming.fibonacci_simple(n);
 		
 		Assert.assertEquals(expected, actual);
 	}
@@ -30,8 +30,17 @@ public class DynamicProgrammingTests {
 	public void testExponential() {
 		int val = 3;
 		int exponent = 3;
-		int expected = 27;
-		int actual = DynamicProgramming.exponential(val, exponent);
+		long expected = 27;
+		long actual = DynamicProgramming.exponential(val, exponent);
+		
+		Assert.assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testMemorisedFibonacci() {
+		int n = 43;
+		long expected = 433494437;
+		long actual = DynamicProgramming.fibonacci_simple(n);
 		
 		Assert.assertEquals(expected, actual);
 	}

@@ -2,13 +2,13 @@ package algorithms;
 
 public class DynamicProgramming {
 
-	public static int fibonacci_array(int n) {
+	public static long fibonacci_array(int n) {
 		
 		if (n == 0) return 0;
 		if (n == 1) return 1;
 		
 		//Setup
-		int[] array = new int[n + 1];
+		long[] array = new long[n + 1];
 		array[0] = 0;
 		array[1] = 1;
 		
@@ -21,25 +21,47 @@ public class DynamicProgramming {
 		return array[n];
 	}
 	
-	public static int fibonacci_simple(int n) {
+	public static long fibonacci_simple(int n) {
 		
-		int last = 1;
-		int secondLast = 0;
+		if (n == 0) return 0;
+		if (n == 1) return 1;
+		
+		long oneBack = 1;
+		long twoBack = 0;
 		
 		for (int i = 2; i <= n; i++) {
-			int _new = last + secondLast;
-			secondLast = last;
-			last = _new;
+			long _new = oneBack + twoBack;
+			twoBack = oneBack;
+			oneBack = _new;
 		}
 		
-		return last;
+		return oneBack;
 	}
 	
-	public static int exponential(int val, int exponent) {
-		int result = 0;
+	public static long exponential(int val, int exponent) {
+		long result = 0;
 		for (int i = 0; i < exponent; i++) {
 			result += val * exponent;
 		}
 		return result;
+	}
+	
+	public static long memorisedFibonacci(int n) {
+		long[] results = new long[n + 1];
+		for (int i = 0; i < n + 1; i++) {
+			results[i] = -1; //Undefined
+		}
+		
+		return memorisedFibonacciRecursive(results, n);
+	}
+	
+	private static long memorisedFibonacciRecursive(long[] results, int n) {
+		if (results[n] != -1) return results[n];
+		
+		long val = (n == 1 || n == 2) ? 1 :
+			memorisedFibonacciRecursive(results, n-2) + memorisedFibonacciRecursive(results, n-1);
+		
+		results[n] = val;
+		return val;
 	}
 }
