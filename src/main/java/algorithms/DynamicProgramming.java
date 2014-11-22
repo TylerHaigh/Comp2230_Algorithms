@@ -90,4 +90,32 @@ public class DynamicProgramming {
 		
 		return change;
 	}
+	
+	public static int[][] matrixMultiply(int[] arraySizes) {
+		int[][] multiplied = new int[arraySizes.length][arraySizes.length];
+		int n = arraySizes.length;
+		
+		//Put zeros along the diagonal
+		for (int i = 0; i < n; i++) {
+			multiplied[i][i] = 0;
+		}
+		
+		for (int w = 0; w < n; w++) {
+			for (int i = 0; i < n - w-1; i++) {
+				int j = w + i + 1;
+				multiplied[i][j] = Integer.MAX_VALUE;
+				
+				//Insert magic here
+				for (int k = i; k < j; k++) {
+					int q = multiplied[i][k] + multiplied [k+1][j] + ((i == 0) ? 0 : arraySizes[i-1]) *
+							arraySizes[k] * arraySizes[j];
+					
+					if (q < multiplied[i][j])
+						multiplied[i][j] = q;
+				}
+			}
+		}
+		
+		return multiplied;
+	}
 }
