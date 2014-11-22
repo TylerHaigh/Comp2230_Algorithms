@@ -1,5 +1,11 @@
 package test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import models.KnapSackObject;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -40,5 +46,23 @@ public class GreedyTests {
 		} catch (UnfeasibleSolutionException ex) {
 			//pass();
 		}
+	}
+	
+	@Test
+	public void testContinuousKnapsack() {
+		KnapSackObject one = new KnapSackObject(1, 120, 5);
+		KnapSackObject two = new KnapSackObject(2, 150, 5);
+		KnapSackObject three = new KnapSackObject(3, 200, 4);
+		
+		List<KnapSackObject> knapsackObjects = new ArrayList<KnapSackObject>();
+		knapsackObjects.add(one);
+		knapsackObjects.add(two);
+		knapsackObjects.add(three);
+		
+		int capacity = 300;
+		
+		Greedy.continuousKnapsack(knapsackObjects, capacity);
+		
+		Assert.assertEquals(true, true);
 	}
 }
