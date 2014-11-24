@@ -127,4 +127,27 @@ public class DynamicProgrammingTests {
 			Assert.assertArrayEquals(expecteds[i], actuals[i]);
 		}
 	}
+	
+	@Test
+	public void testRook() {
+		int n = 3;
+		int m = n;
+		
+		int[][] expecteds = {
+				{1,1,1},
+				{1,2,3},
+				{1,3,6}
+			};
+		
+		int[][] actuals = DynamicProgramming.rook(n, m);
+		
+		for (int i = 0; i < actuals.length; i++) {
+			for (int j = 0; j < actuals[i].length; j++) {
+				System.out.print(actuals[i][j] + ",\t");
+			}
+			System.out.println();
+			
+			Assert.assertArrayEquals(expecteds[i], actuals[i]);
+		}
+	}
 }
