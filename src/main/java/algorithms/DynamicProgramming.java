@@ -1,5 +1,8 @@
 package algorithms;
 
+import java.util.List;
+import models.KnapSackObject;
+
 public class DynamicProgramming {
 
 	public static long fibonacci_array(int n) {
@@ -166,6 +169,39 @@ public class DynamicProgramming {
 		for (int i = 1; i < n; i++) {
 			for (int j = 1; j < m; j++) {
 				matrix[i][j] = matrix[i-1][j] + matrix[i][j-1];
+			}
+		}
+		
+		return matrix;
+	}
+	
+	public static int[][] dynamicKnapsack(List<KnapSackObject> objects, int capacity) {
+		int n = objects.size();
+		int[][] matrix = new int[n+1][capacity+1];
+		
+		//Setup
+		for (int i = 0; i < n; i++) {
+			matrix[i][0] = 0;
+		}
+		
+		for (int i = 0; i < capacity; i++) {
+			matrix[0][i] = 0;
+		}
+		
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j <= capacity; j++) {
+				int iWeight = objects.get(i-1).weight;
+				int iValue = objects.get(i-1).profit;
+				
+				if (j >= iWeight) {
+					//Use, or don't use and use old value
+					int m1 = matrix[i-1][j];
+					int m2 = matrix[i-1][j-iWeight] + iValue;
+					matrix[i][j] = Math.max(m1, m2);
+				} else {
+					//Can't use. Use older value
+					matrix[i][j] = matrix[i-1][j];
+				}
 			}
 		}
 		

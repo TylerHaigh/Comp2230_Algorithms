@@ -1,5 +1,10 @@
 package test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import models.KnapSackObject;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -140,6 +145,41 @@ public class DynamicProgrammingTests {
 			};
 		
 		int[][] actuals = DynamicProgramming.rook(n, m);
+		
+		for (int i = 0; i < actuals.length; i++) {
+			for (int j = 0; j < actuals[i].length; j++) {
+				System.out.print(actuals[i][j] + ",\t");
+			}
+			System.out.println();
+			
+			Assert.assertArrayEquals(expecteds[i], actuals[i]);
+		}
+	}
+	
+	@Test
+	public void testDynamicKnapsack() {
+		List<KnapSackObject> objects = new ArrayList<KnapSackObject>();
+		KnapSackObject one = new KnapSackObject(1,5,2);
+		KnapSackObject two = new KnapSackObject(2,8,3);
+		KnapSackObject three = new KnapSackObject(3,7,1);
+		KnapSackObject four = new KnapSackObject(4,15,2);
+		
+		objects.add(one);
+		objects.add(two);
+		objects.add(three);
+		objects.add(four);
+		
+		int capacity = 5;
+		
+		int[][] expecteds = {
+				{0,0,0,0,0,0},
+				{0,0,5,5,5,5},
+				{0,0,5,8,8,13},
+				{0,7,7,12,15,15},
+				{0,7,15,22,22,37}
+		};
+		
+		int[][] actuals = DynamicProgramming.dynamicKnapsack(objects, capacity);
 		
 		for (int i = 0; i < actuals.length; i++) {
 			for (int j = 0; j < actuals[i].length; j++) {
